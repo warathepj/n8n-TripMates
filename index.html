@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฟอร์มจับคู่เพื่อนร่วมเดินทาง</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Light gray background */
+        }
+        /* Custom checkbox and radio button styling */
+        input[type="checkbox"],
+        input[type="radio"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            display: inline-block;
+            width: 1.25rem; /* w-5 */
+            height: 1.25rem; /* h-5 */
+            border-radius: 0.25rem; /* rounded */
+            border: 1px solid #d1d5db; /* border-gray-300 */
+            background-color: #fff; /* bg-white */
+            vertical-align: middle;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        input[type="radio"] {
+            border-radius: 50%; /* rounded-full for radio */
+        }
+
+        input[type="checkbox"]:checked,
+        input[type="radio"]:checked {
+            background-color: #3b82f6; /* bg-blue-500 */
+            border-color: #3b82f6; /* border-blue-500 */
+        }
+
+        input[type="checkbox"]:checked:after {
+            content: '✔';
+            color: white;
+            font-size: 0.75rem; /* text-xs */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        input[type="radio"]:checked:after {
+            content: '';
+            width: 0.5rem; /* w-2 */
+            height: 0.5rem; /* h-2 */
+            background-color: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-xl border border-gray-200">
+        <h1 class="text-3xl sm:text-4xl font-bold text-center text-blue-700 mb-6">แบบฟอร์มจับคู่เพื่อนร่วมเดินทาง ตามความพึงพอใจ</h1>
+        <p class="text-center text-gray-600 mb-8 leading-relaxed">
+            โปรดกรอกข้อมูลในแบบฟอร์มนี้ เพื่อให้เราสามารถจับคู่ท่านกับเพื่อนร่วมเดินทางที่เข้ากันได้
+        </p>
+
+        <form id="travelMatchingForm" class="space-y-8">
+            <!-- Section 1: Personal Information -->
+            <section class="border-b border-gray-200 pb-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">1. ข้อมูลส่วนตัว</h2>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-lg font-medium mb-2">เพศ:</label>
+                    <div class="space-y-3">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="gender" value="ชาย" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ชาย</span>
+                        </label>
+                        <label class="inline-flex items-center ml-6 text-gray-800 cursor-pointer">
+                            <input type="radio" name="gender" value="หญิง" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">หญิง</span>
+                        </label>
+                        <label class="inline-flex items-center ml-6 text-gray-800 cursor-pointer">
+                            <input type="radio" name="gender" value="ไม่ระบุเพศ" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ไม่ระบุเพศ</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 text-lg font-medium mb-2">ช่วงอายุ:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="age_range" value="18-24 ปี" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">18-24 ปี</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="age_range" value="25-34 ปี" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">25-34 ปี</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="age_range" value="35-44 ปี" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">35-44 ปี</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="age_range" value="45-54 ปี" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">45-54 ปี</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="age_range" value="55-64 ปี" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">55-64 ปี</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="age_range" value="65 ปีขึ้นไป" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">65 ปีขึ้นไป</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Travel Style -->
+            <section class="border-b border-gray-200 pb-8 pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">2. รูปแบบการเดินทาง</h2>
+                <label class="block text-gray-700 text-lg font-medium mb-2">รูปแบบการเดินทางที่ท่านชื่นชอบที่สุดคือแบบใด? (เลือกได้มากกว่า 1 ข้อ)</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="travel_style" value="ผจญภัย" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ผจญภัย (เช่น เดินป่า, กีฬาผาดโผน, สำรวจนอกเส้นทาง)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="travel_style" value="พักผ่อน/สบายๆ" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">พักผ่อน/สบายๆ (เช่น เที่ยวทะเล, สปา, การเดินทางแบบช้าๆ)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="travel_style" value="วัฒนธรรม/ดื่มด่ำ" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">วัฒนธรรม/ดื่มด่ำ (เช่น เยี่ยมชมพิพิธภัณฑ์, สถานที่ประวัติศาสตร์, สัมผัสวิถีชีวิตท้องถิ่น)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="travel_style" value="หรูหรา/สะดวกสบาย" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">หรูหรา/สะดวกสบาย (เช่น โรงแรมหรู, อาหารเลิศรส, ประสบการณ์ระดับพรีเมียม)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="travel_style" value="ประหยัด" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ประหยัด (เช่น พักโฮสเทล, อาหารริมทาง, โดยสารระบบขนส่งสาธารณะ)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="travel_style" value="เดินทางอิสระ/ไม่ใช้ไกด์" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">เดินทางอิสระ/ไม่ใช้ไกด์</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="travel_style" value="ทัวร์จัดนำเที่ยว/มีไกด์นำทาง" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ทัวร์จัดนำเที่ยว/มีไกด์นำทาง</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="travel_style" value="เดินทางแบบฉับพลัน/ยืดหยุ่น" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">เดินทางแบบฉับพลัน/ยืดหยุ่น</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="travel_style" value="ชอบการวางแผนอย่างละเอียด" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ชอบการวางแผนอย่างละเอียด</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Section 3: Interests/Activities -->
+            <section class="border-b border-gray-200 pb-8 pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">3. ความสนใจ/กิจกรรม</h2>
+                <label class="block text-gray-700 text-lg font-medium mb-2">ความสนใจและกิจกรรมหลักที่ท่านชื่นชอบขณะเดินทางคืออะไร? (เลือกได้มากกว่า 1 ข้อ)</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="เดินป่า/เดินเขา" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">เดินป่า/เดินเขา</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="ชายหาด/ว่ายน้ำ/กีฬาทางน้ำ" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ชายหาด/ว่ายน้ำ/กีฬาทางน้ำ</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="อาหาร/ประสบการณ์การทำอาหาร" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">อาหาร/ประสบการณ์การทำอาหาร</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="ศิลปะ/พิพิธภัณฑ์/หอศิลป์" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ศิลปะ/พิพิธภัณฑ์/หอศิลป์</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="ประวัติศาสตร์/โบราณคดี" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ประวัติศาสตร์/โบราณคดี</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="สถานบันเทิงยามค่ำคืน/ปาร์ตี้" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">สถานบันเทิงยามค่ำคืน/ปาร์ตี้</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="ช้อปปิ้ง" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ช้อปปิ้ง</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="ถ่ายภาพ" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ถ่ายภาพ</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="ชมสัตว์ป่า/ธรรมชาติ" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ชมสัตว์ป่า/ธรรมชาติ</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="เทศกาล/งานอีเว้นท์" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">เทศกาล/งานอีเว้นท์</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="งานอาสา/งานชุมชน" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">งานอาสา/งานชุมชน</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="สุขภาพ/โยคะ/การทำสมาธิ" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">สุขภาพ/โยคะ/การทำสมาธิ</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="checkbox" name="interests" value="กิจกรรมผจญภัยกลางแจ้ง" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">กิจกรรมผจญภัยกลางแจ้ง (เช่น ปีนเขา, ล่องแพ, โหนสลิง)</span>
+                    </label>
+                    <div class="flex items-center w-full">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer mr-2">
+                            <input type="checkbox" name="interests" value="อื่นๆ" id="other_interest_checkbox" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">อื่นๆ (โปรดระบุ):</span>
+                        </label>
+                        <input type="text" id="other_interest_text" name="other_interest_text" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-gray-50" placeholder="ระบุความสนใจอื่นๆ">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Preferred Destinations -->
+            <section class="border-b border-gray-200 pb-8 pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">4. สถานที่ปลายทางที่พึงประสงค์</h2>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-lg font-medium mb-2">ท่านสนใจสถานที่ปลายทางประเภทใดมากที่สุด? (เลือกได้มากกว่า 1 ข้อ)</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="destination_type" value="ชายหาด/ชายฝั่ง" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ชายหาด/ชายฝั่ง</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="destination_type" value="ภูเขา/ทะเลสาบ" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ภูเขา/ทะเลสาบ</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="destination_type" value="เมืองใหญ่" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">เมืองใหญ่</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="destination_type" value="ชนบท/ทุ่งนา" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ชนบท/ทุ่งนา</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="destination_type" value="สถานที่ประวัติศาสตร์" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">สถานที่ประวัติศาสตร์</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="destination_type" value="สิ่งมหัศจรรย์ทางธรรมชาติ" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">สิ่งมหัศจรรย์ทางธรรมชาติ</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label for="avoid_destinations" class="block text-gray-700 text-lg font-medium mb-2">มีสถานที่ใดบ้างที่ท่านประสงค์จะ <span class="font-bold">หลีกเลี่ยง</span>?</label>
+                    <textarea id="avoid_destinations" name="avoid_destinations" rows="3" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-gray-50" placeholder="เช่น สถานที่ที่คนพลุกพล่าน, อากาศร้อนจัด, ทะเลทราย"></textarea>
+                </div>
+            </section>
+
+            <!-- Section 5: Travel Time -->
+            <section class="border-b border-gray-200 pb-8 pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">5. ช่วงเวลาที่สามารถเดินทางได้</h2>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-lg font-medium mb-2">ท่านสะดวกเดินทางในช่วงใด? (เลือกได้มากกว่า 1 ข้อ)</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="travel_period" value="มกราคม - มีนาคม" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">มกราคม - มีนาคม</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="travel_period" value="เมษายน - มิถุนายน" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">เมษายน - มิถุนายน</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="travel_period" value="กรกฎาคม - กันยายน" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">กรกฎาคม - กันยายน</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="checkbox" name="travel_period" value="ตุลาคม - ธันวาคม" class="form-checkbox h-5 w-5 text-blue-600 rounded focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ตุลาคม - ธันวาคม</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-lg font-medium mb-2">ท่านสามารถยืดหยุ่นเรื่องวันที่เดินทางภายในช่วงเวลาที่ระบุได้หรือไม่?</label>
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center space-y-3 sm:space-y-0 sm:space-x-6">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="flexible_dates" value="ได้" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ได้</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="flexible_dates" value="ไม่ได้, มีวันที่แน่นอน" id="not_flexible_dates" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ไม่ได้, มีวันที่แน่นอน (โปรดระบุหากทราบ):</span>
+                        </label>
+                        <input type="text" id="exact_dates_text" name="exact_dates_text" class="mt-1 sm:mt-0 block w-full sm:w-auto border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-gray-50" placeholder="เช่น 15-20 พฤศจิกายน 2568">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Travel Duration -->
+            <section class="border-b border-gray-200 pb-8 pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">6. ระยะเวลาการเดินทาง</h2>
+                <label class="block text-gray-700 text-lg font-medium mb-2">ระยะเวลาการเดินทางที่ท่านพึงประสงค์คือเท่าไร?</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="travel_duration" value="ทริปสั้น (1-3 วัน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ทริปสั้น (1-3 วัน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="travel_duration" value="ทริปขนาดกลาง (4-7 วัน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ทริปขนาดกลาง (4-7 วัน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="travel_duration" value="ทริปยาว (8-14 วัน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ทริปยาว (8-14 วัน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="travel_duration" value="ทริปยาวพิเศษ (2-4 สัปดาห์)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ทริปยาวพิเศษ (2-4 สัปดาห์)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="travel_duration" value="ทริประยะยาว (มากกว่า 4 สัปดาห์)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ทริประยะยาว (มากกว่า 4 สัปดาห์)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="travel_duration" value="ยืดหยุ่น" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ยืดหยุ่น</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Section 7: Budget -->
+            <section class="border-b border-gray-200 pb-8 pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">7. งบประมาณ (ต่อท่าน, ต่อวัน, ไม่รวมค่าเดินทางโดยเครื่องบิน)</h2>
+                <label class="block text-gray-700 text-lg font-medium mb-2">งบประมาณรายวันที่ท่านสะดวกสำหรับที่พัก, อาหาร, และกิจกรรมคือเท่าไร?</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="daily_budget" value="ประหยัด (ต่ำกว่า 800 บาทต่อวัน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ประหยัด (ต่ำกว่า 800 บาทต่อวัน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="daily_budget" value="ปานกลาง (801 - 2000 บาทต่อวัน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ปานกลาง (801 - 2000 บาทต่อวัน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="daily_budget" value="สบายๆ (2001 - 4000 บาทต่อวัน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">สบายๆ (2001 - 4000 บาทต่อวัน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="daily_budget" value="หรูหรา (มากกว่า 4001 บาทต่อวัน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">หรูหรา (มากกว่า 4001 บาทต่อวัน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="daily_budget" value="ยืดหยุ่น, ขึ้นอยู่กับสถานที่/ประสบการณ์" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ยืดหยุ่น, ขึ้นอยู่กับสถานที่/ประสบการณ์</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Section 8: Group Size Preference -->
+            <section class="border-b border-gray-200 pb-8 pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">8. ความพึงพอใจเรื่องขนาดกลุ่ม</h2>
+                <label class="block text-gray-700 text-lg font-medium mb-2">ขนาดกลุ่มที่เหมาะสมสำหรับการเดินทางของท่านคือเท่าไร?</label>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="group_size" value="เดินทางสองคน (เพื่อนร่วมเดินทาง 1 คน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">เดินทางสองคน (เพื่อนร่วมเดินทาง 1 คน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="group_size" value="กลุ่มเล็ก (3-4 คน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">กลุ่มเล็ก (3-4 คน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="group_size" value="กลุ่มกลาง (5-8 คน)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">กลุ่มกลาง (5-8 คน)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="group_size" value="กลุ่มใหญ่ (9 คนขึ้นไป)" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">กลุ่มใหญ่ (9 คนขึ้นไป)</span>
+                    </label>
+                    <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                        <input type="radio" name="group_size" value="ยืดหยุ่น" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <span class="ml-3 text-base">ยืดหยุ่น</span>
+                    </label>
+                </div>
+            </section>
+
+            <!-- Section 9: Group Dynamics and Communication -->
+            <section class="border-b border-gray-200 pb-8 pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">9. พลวัตของกลุ่มและการสื่อสาร (อ้างอิงจากความพึงพอใจเรื่องขนาดกลุ่ม)</h2>
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-lg font-medium mb-2">ท่านต้องการพลวัตของกลุ่มแบบใด?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="group_dynamics" value="ชอบเข้าสังคมและมีปฏิสัมพันธ์สูง" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ชอบเข้าสังคมและมีปฏิสัมพันธ์สูง</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="group_dynamics" value="ต้องการความสมดุลระหว่างเวลาที่ใช้กับกลุ่มและพื้นที่ส่วนตัว" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ต้องการความสมดุลระหว่างเวลาที่ใช้กับกลุ่มและพื้นที่ส่วนตัว</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="group_dynamics" value="ต้องการความเป็นอิสระภายในกลุ่ม" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ต้องการความเป็นอิสระภายในกลุ่ม (เช่น นัดเจอกันเพื่อทานอาหาร แต่สำรวจแยกกัน)</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="group_dynamics" value="เงียบสงบและไม่เร่งรีบ" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">เงียบสงบและไม่เร่งรีบ</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-lg font-medium mb-2">ท่านชอบสื่อสารกับสมาชิกกลุ่มก่อนและระหว่างการเดินทางด้วยวิธีใด?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="communication_method" value="ตรวจสอบ/พูดคุยกันเป็นประจำ" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ตรวจสอบ/พูดคุยกันเป็นประจำ</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="communication_method" value="เฉพาะเมื่อจำเป็นสำหรับการวางแผน" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">เฉพาะเมื่อจำเป็นสำหรับการวางแผน</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="communication_method" value="แอปพลิเคชันส่งข้อความกลุ่ม" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">แอปพลิเคชันส่งข้อความกลุ่ม (เช่น Line, Telegram, Facebook Messenger)</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="communication_method" value="พูดคุยกันโดยตรง" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">พูดคุยกันโดยตรง</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-lg font-medium mb-2">เกี่ยวกับการตัดสินใจภายในกลุ่ม ท่าน:</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="group_decision" value="ต้องการมีส่วนร่วมในการตัดสินใจส่วนใหญ่" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ต้องการมีส่วนร่วมในการตัดสินใจส่วนใหญ่</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="group_decision" value="ยินดีที่จะปล่อยให้ผู้อื่นตัดสินใจ" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ยินดีที่จะปล่อยให้ผู้อื่นตัดสินใจ</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="group_decision" value="ต้องการมอบหมายงาน/การตัดสินใจเฉพาะ" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ต้องการมอบหมายงาน/การตัดสินใจเฉพาะ</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-lg font-medium mb-2">ท่านสะดวกกับความฉับพลันและการเปลี่ยนแปลงแผนการเดินทางในกลุ่มมากน้อยเพียงใด?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="spontaneity" value="สะดวกมาก, ฉันชอบการเปลี่ยนแปลงแบบฉับพลัน" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">สะดวกมาก, ฉันชอบการเปลี่ยนแปลงแบบฉับพลัน</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="spontaneity" value="ค่อนข้างสะดวก, เปิดรับความยืดหยุ่นบ้าง" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ค่อนข้างสะดวก, เปิดรับความยืดหยุ่นบ้าง</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="spontaneity" value="ชอบทำตามแผนการที่วางไว้ล่วงหน้า" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ชอบทำตามแผนการที่วางไว้ล่วงหน้า</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-lg font-medium mb-2">ท่านยินดีที่จะแบ่งปันความรับผิดชอบหรือมีส่วนร่วมในงานกลุ่มหรือไม่ (เช่น ทำอาหารหากเป็นที่พักพร้อมครัว, นำทาง, ค้นคว้าข้อมูล)?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="share_responsibilities" value="ยินดี, ยินดีที่จะมีส่วนร่วม" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ยินดี, ยินดีที่จะมีส่วนร่วม</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="share_responsibilities" value="ยินดี, แต่ขอเป็นงานเฉพาะ" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ยินดี, แต่ขอเป็นงานเฉพาะ</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="share_responsibilities" value="ไม่, ชอบให้มีคนจัดเตรียมทุกอย่างให้" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">ไม่, ชอบให้มีคนจัดเตรียมทุกอย่างให้</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 text-lg font-medium mb-2">ท่านชื่นชอบจังหวะการเดินทางแบบใดเมื่ออยู่กับกลุ่ม?</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4">
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="travel_pace" value="เร่งรีบ, อัดแน่นไปด้วยกิจกรรมให้มากที่สุด" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">เร่งรีบ, อัดแน่นไปด้วยกิจกรรมให้มากที่สุด</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="travel_pace" value="สมดุล, มีทั้งกิจกรรมและการพักผ่อน" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">สมดุล, มีทั้งกิจกรรมและการพักผ่อน</span>
+                        </label>
+                        <label class="inline-flex items-center text-gray-800 cursor-pointer">
+                            <input type="radio" name="travel_pace" value="สบายๆ, ใช้เวลาไปอย่างช้าๆ และมีเวลาว่างมาก" class="form-radio h-5 w-5 text-blue-600 rounded-full focus:ring-blue-500 transition duration-150 ease-in-out">
+                            <span class="ml-3 text-base">สบายๆ, ใช้เวลาไปอย่างช้าๆ และมีเวลาว่างมาก</span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 10: Additional Comments/Preferences -->
+            <section class="pt-8">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">10. ข้อคิดเห็น/ความพึงพอใจเพิ่มเติม</h2>
+                <div>
+                    <label for="additional_comments" class="block text-gray-700 text-lg font-medium mb-2">มีสิ่งอื่นใดที่ท่านต้องการแจ้งให้เราทราบเกี่ยวกับความพึงพอใจในการเดินทางของท่าน หรือสิ่งที่ท่านมองหาในเพื่อนร่วมเดินทาง/กลุ่มหรือไม่?</label>
+                    <textarea id="additional_comments" name="additional_comments" rows="5" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-base bg-gray-50" placeholder="กรุณาระบุที่นี่..."></textarea>
+                </div>
+            </section>
+
+            <!-- Submit Button -->
+            <div class="flex justify-center mt-10">
+                <button type="submit" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition duration-200 ease-in-out transform hover:scale-105">
+                    ส่งแบบฟอร์ม
+                </button>
+            </div>
+        </form>
+
+        <!-- Message Box for Form Submission (instead of alert) -->
+        <div id="messageBox" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden">
+            <div class="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full text-center">
+                <h3 id="messageTitle" class="text-xl font-semibold mb-4 text-gray-800"></h3>
+                <p id="messageContent" class="text-gray-700 mb-6"></p>
+                <button id="closeMessageBox" class="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    ปิด
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get form element
+            const form = document.getElementById('travelMatchingForm');
+            // Get elements for the "Other Interest" text input
+            const otherInterestCheckbox = document.getElementById('other_interest_checkbox');
+            const otherInterestText = document.getElementById('other_interest_text');
+            // Get elements for the "Exact Dates" text input
+            const notFlexibleDatesRadio = document.getElementById('not_flexible_dates');
+            const exactDatesText = document.getElementById('exact_dates_text');
+            // Get elements for the message box
+            const messageBox = document.getElementById('messageBox');
+            const messageTitle = document.getElementById('messageTitle');
+            const messageContent = document.getElementById('messageContent');
+            const closeMessageBoxButton = document.getElementById('closeMessageBox');
+
+            // Initially disable the "Other Interest" text field
+            otherInterestText.disabled = true;
+            otherInterestText.classList.add('opacity-50', 'cursor-not-allowed');
+
+            // Add event listener to toggle "Other Interest" text field
+            otherInterestCheckbox.addEventListener('change', function() {
+                if (this.checked) {
+                    otherInterestText.disabled = false;
+                    otherInterestText.classList.remove('opacity-50', 'cursor-not-allowed');
+                    otherInterestText.focus();
+                } else {
+                    otherInterestText.disabled = true;
+                    otherInterestText.value = ''; // Clear content when unchecked
+                    otherInterestText.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            });
+
+            // Initially disable the "Exact Dates" text field
+            exactDatesText.disabled = true;
+            exactDatesText.classList.add('opacity-50', 'cursor-not-allowed');
+
+            // Add event listener to toggle "Exact Dates" text field based on radio selection
+            const flexibleDatesRadios = document.querySelectorAll('input[name="flexible_dates"]');
+            flexibleDatesRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (notFlexibleDatesRadio.checked) {
+                        exactDatesText.disabled = false;
+                        exactDatesText.classList.remove('opacity-50', 'cursor-not-allowed');
+                        exactDatesText.focus();
+                    } else {
+                        exactDatesText.disabled = true;
+                        exactDatesText.value = ''; // Clear content when unchecked
+                        exactDatesText.classList.add('opacity-50', 'cursor-not-allowed');
+                    }
+                });
+            });
+
+            // Function to show custom message box
+            function showMessageBox(title, content) {
+                messageTitle.textContent = title;
+                messageContent.textContent = content;
+                messageBox.classList.remove('hidden');
+            }
+
+            // Event listener to close message box
+            closeMessageBoxButton.addEventListener('click', function() {
+                messageBox.classList.add('hidden');
+            });
+
+
+            // Handle form submission
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                // Collect form data
+                const formData = new FormData(form);
+                const data = {};
+                for (let [key, value] of formData.entries()) {
+                    // For checkboxes and radios, collect all selected values in an array
+                    if (data[key]) {
+                        if (Array.isArray(data[key])) {
+                            data[key].push(value);
+                        } else {
+                            data[key] = [data[key], value];
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                }
+
+                // Handle "Other Interest" text if checkbox is checked
+                if (otherInterestCheckbox.checked && otherInterestText.value.trim() !== '') {
+                    if (Array.isArray(data['interests'])) {
+                        data['interests'].push(`อื่นๆ: ${otherInterestText.value.trim()}`);
+                    } else {
+                        data['interests'] = [`อื่นๆ: ${otherInterestText.value.trim()}`];
+                    }
+                }
+
+                // Handle "Exact Dates" text if radio is selected
+                if (notFlexibleDatesRadio.checked && exactDatesText.value.trim() !== '') {
+                    data['flexible_dates'] = `ไม่ได้, มีวันที่แน่นอน: ${exactDatesText.value.trim()}`;
+                }
+
+                // Log or process the collected data (for demonstration)
+                console.log('Form Data:', data);
+
+                // Show success message
+                showMessageBox('แบบฟอร์มถูกส่งแล้ว', 'ขอบคุณที่กรอกข้อมูล! ข้อมูลของคุณได้รับการบันทึกแล้ว.');
+
+                // You can send this `data` object to a server using fetch API here
+                // Example:
+                /*
+                fetch('/api/submit-form', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log('Success:', result);
+                    showMessageBox('แบบฟอร์มถูกส่งแล้ว', 'ขอบคุณที่กรอกข้อมูล! ข้อมูลของคุณได้รับการบันทึกแล้ว.');
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showMessageBox('เกิดข้อผิดพลาด', 'มีข้อผิดพลาดในการส่งแบบฟอร์ม กรุณาลองใหม่.');
+                });
+                */
+
+                // Optionally reset the form
+                form.reset();
+                otherInterestText.disabled = true;
+                otherInterestText.value = '';
+                otherInterestText.classList.add('opacity-50', 'cursor-not-allowed');
+                exactDatesText.disabled = true;
+                exactDatesText.value = '';
+                exactDatesText.classList.add('opacity-50', 'cursor-not-allowed');
+            });
+        });
+    </script>
+</body>
+</html>
