@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 3000;
 
 // Variable to store db.json data
 let dbData = {};
+// Variable to store the last webhook response data
+let lastWebhookResponseData = null;
 
 // Function to load db.json data
 async function loadDbData() {
@@ -33,6 +35,11 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+// New route to serve match.html
+app.get('/match', (req, res) => {
+    res.sendFile(path.join(__dirname, 'match.html'));
+});
+
 // New route to handle form submissions
 app.post('/submit-form', async (req, res) => {
     const formData = req.body;
@@ -49,11 +56,21 @@ app.post('/submit-form', async (req, res) => {
     try {
         const webhookResponse = await axios.post(webhookUrl, payload); // Send the merged payload
         console.log('Successfully forwarded data to webhook:', webhookResponse.data);
-        res.json({ message: 'Form data received and forwarded successfully!', webhookStatus: webhookResponse.status, webhookData: webhookResponse.data });
+        lastWebhookResponseData = webhookResponse.data; // Store the webhook response data
+        res.redirect('/match'); // Redirect to match.html
     } catch (error) {
         console.error('Error forwarding data to webhook:', error.message);
         // Respond to the client with an error message
         res.status(500).json({ message: `Failed to forward form data to webhook: ${error.message}`, error: error.message });
+    }
+});
+
+// New route to get the last webhook response data
+app.get('/get-last-webhook-data', (req, res) => {
+    if (lastWebhookResponseData) {
+        res.json(lastWebhookResponseData);
+    } else {
+        res.status(404).json({ message: 'No webhook data available.' });
     }
 });
 

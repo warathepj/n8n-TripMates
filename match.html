@@ -6,6 +6,66 @@
     <title>Document</title>
 </head>
 <body>
-    hi
+    <h1>Webhook Response Data</h1>
+    <div id="webhook-data">Loading...</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/get-last-webhook-data');
+                const data = await response.json();
+                const webhookDataElement = document.getElementById('webhook-data');
+                if (response.ok) {
+                    try {
+                        // First, remove markdown code block delimiters
+                        let tempOutput = data.output.replace(/```json\n|```/g, '').trim();
+                        // Then, extract only the JSON array part
+                        const jsonMatch = tempOutput.match(/\[.*\]/s);
+                        if (!jsonMatch || jsonMatch.length === 0) {
+                            throw new Error("No valid JSON array found in the output.");
+                        }
+                        const cleanedOutput = jsonMatch[0];
+                        const parsedOutput = JSON.parse(cleanedOutput);
+                        webhookDataElement.innerHTML = ''; // Clear "Loading..."
+
+                        if (Array.isArray(parsedOutput)) {
+                            parsedOutput.forEach(traveler => {
+                                const travelerDiv = document.createElement('div');
+                                travelerDiv.style.border = '1px solid #ccc';
+                                travelerDiv.style.padding = '15px';
+                                travelerDiv.style.margin = '10px 0';
+                                travelerDiv.style.borderRadius = '8px';
+                                travelerDiv.style.backgroundColor = '#f9f9f9';
+
+                                const idElement = document.createElement('h3');
+                                idElement.textContent = `ID: ${traveler.id}`;
+                                idElement.style.color = '#333';
+                                idElement.style.marginBottom = '5px';
+
+                                const reasonElement = document.createElement('p');
+                                reasonElement.textContent = `Reason: ${traveler.reason}`;
+                                reasonElement.style.color = '#555';
+                                reasonElement.style.lineHeight = '1.5';
+
+                                travelerDiv.appendChild(idElement);
+                                travelerDiv.appendChild(reasonElement);
+                                webhookDataElement.appendChild(travelerDiv);
+                            });
+                        } else {
+                            webhookDataElement.textContent = `Error: Unexpected data format. Expected an array.`;
+                        }
+                    } catch (parseError) {
+                        webhookDataElement.textContent = `Error parsing output: ${parseError.message}`;
+                        console.error('Error parsing output:', parseError);
+                    }
+                } else {
+                    webhookDataElement.textContent = `Error: ${data.message || 'Failed to fetch data'}`;
+                }
+            } catch (error) {
+                document.getElementById('webhook-data').textContent = `Error fetching webhook data: ${error.message}`;
+                console.error('Error fetching webhook data:', error);
+            }
+        });
+    </script>
 </body>
 </html>
