@@ -659,24 +659,27 @@
 
                 // You can send this `data` object to a server using fetch API here
                 // Example:
-                /*
-                fetch('/api/submit-form', {
+                fetch('http://localhost:5678/webhook-test/7845767d-5f11-4705-af26-04c20d974b9b', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(data)
                 })
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(result => {
                     console.log('Success:', result);
                     showMessageBox('แบบฟอร์มถูกส่งแล้ว', 'ขอบคุณที่กรอกข้อมูล! ข้อมูลของคุณได้รับการบันทึกแล้ว.');
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    showMessageBox('เกิดข้อผิดพลาด', 'มีข้อผิดพลาดในการส่งแบบฟอร์ม กรุณาลองใหม่.');
+                    showMessageBox('เกิดข้อผิดพลาด', `มีข้อผิดพลาดในการส่งแบบฟอร์ม: ${error.message} กรุณาลองใหม่.`);
                 });
-                */
 
                 // Optionally reset the form
                 form.reset();
