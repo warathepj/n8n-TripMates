@@ -567,23 +567,6 @@
             const messageContent = document.getElementById('messageContent');
             const closeMessageBoxButton = document.getElementById('closeMessageBox');
 
-            let dbData = {}; // Variable to store db.json data
-
-            // Fetch db.json data
-            fetch('db.json')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    dbData = data;
-                    console.log('db.json loaded:', dbData);
-                })
-                .catch(error => {
-                    console.error('Error loading db.json:', error);
-                });
 
             // Initially disable the "Other Interest" text field
             otherInterestText.disabled = true;
@@ -670,26 +653,15 @@
                 }
 
                 // Log or process the collected data (for demonstration)
-                // Merge form data with db.json data
-                const payload = {
-                    formData: data,
-                    dbData: dbData
-                };
+                console.log('Sending form data:', data); // Log data before sending
 
-                // Log or process the collected data (for demonstration)
-                console.log('Payload to send:', payload);
-
-                // Show success message
-                showMessageBox('แบบฟอร์มถูกส่งแล้ว', 'ขอบคุณที่กรอกข้อมูล! ข้อมูลของคุณได้รับการบันทึกแล้ว.');
-
-                // You can send this `payload` object to a server using fetch API here
-                // Example:
-                fetch('http://localhost:5678/webhook-test/7845767d-5f11-4705-af26-04c20d974b9b', {
+                // Send data to server.js
+                fetch('/submit-form', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(payload)
+                    body: JSON.stringify(data)
                 })
                 .then(response => {
                     if (!response.ok) {
