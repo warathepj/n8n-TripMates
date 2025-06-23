@@ -682,17 +682,21 @@
                     body: JSON.stringify(data)
                 })
                 .then(response => {
-                    // The server is now redirecting to /match, so we don't expect a JSON response here.
-                    // The browser will automatically follow the redirect.
-                    // We only need to handle cases where the initial POST request itself fails (e.g., network error, or server sends a non-redirect error status).
-                    if (!response.ok && response.status !== 302) { // Check for non-OK and non-redirect status
+                    // Hide loading overlay regardless of success or failure
+                    loadingOverlay.classList.add('hidden');
+
+                    // If the server responded with a redirect, manually navigate
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else if (!response.ok) {
                         // If it's not a redirect and not OK, try to parse error message from server if available
                         return response.json().then(err => { throw new Error(err.message || 'Server error'); });
                     }
-                    // If response is OK or a redirect (302), the browser will handle the navigation.
-                    // No further client-side action needed for successful submission/redirection.
+                    // If response is OK and not a redirect, no further action needed (e.g., if server sends a success message without redirect)
                 })
                 .catch(error => {
+                    // Hide loading overlay on error
+                    loadingOverlay.classList.add('hidden');
                     console.error('Error:', error);
                     showMessageBox('เกิดข้อผิดพลาด', `มีข้อผิดพลาดในการส่งแบบฟอร์ม: ${error.message} กรุณาลองใหม่.`);
                 });

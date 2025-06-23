@@ -387,5 +387,40 @@
         "group_size": "กลุ่มเล็ก (3-4 คน)",
         "group_dynamics": "เป็นกันเองแต่ก็มีพื้นที่ส่วนตัว",
         "communication_frequency": "สื่อสารเป็นระยะเพื่ออัปเดต"
+    },
+    {
+        "id": "user_012",
+        "personal_info": {
+            "gender": "ชาย",
+            "age_range": "18-24 ปี"
+        },
+        "travel_style": [
+            "พักผ่อน/สบายๆ",
+            "เดินทางอิสระ/ไม่ใช้ไกด์"
+        ],
+        "interests": [
+            "ชายหาด/ว่ายน้ำ/กีฬาทางน้ำ",
+            "สถานบันเทิงยามค่ำคืน/ปาร์ตี้"
+        ],
+        "preferred_destinations": {
+            "type": [
+                "ชายหาด/ชายฝั่ง",
+                "เมืองใหญ่"
+            ],
+            "avoid": ""
+        },
+        "travel_time": {
+            "period": [
+                "เมษายน - มิถุนายน"
+            ],
+            "flexible_dates": "ได้",
+            "exact_dates_text": ""
+        },
+        "travel_duration": "ทริปสั้น (1-3 วัน)",
+        "budget": "ปานกลาง (801 - 2000 บาทต่อวัน)",
+        "group_size": "กลุ่มใหญ่ (9 คนขึ้นไป)",
+        "group_dynamics": "ชอบเข้าสังคมและมีปฏิสัมพันธ์สูง",
+        "communication_frequency": "สื่อสารเป็นระยะเพื่ออัปเดต",
+        "additional_comments": "จะเอาน้องคอร์กี้ไปด้วย"
     }
 ]
